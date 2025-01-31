@@ -11,18 +11,24 @@ body {
     cursor: pointer; /* クリック可能 */
 }
 
-/* 章選択ボタン */
+/* 章選択ボタン（小さなマークにして左上に配置） */
 #menu-button {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    background: #222;
+    top: 10px;
+    left: 10px;
+    background: none;
     color: #fff;
-    border: 2px solid #fff;
-    font-size: 18px;
-    padding: 10px 15px;
+    font-size: 14px;
+    padding: 5px;
     cursor: pointer;
     z-index: 200;
+    border: none;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+#menu-button:hover {
+    opacity: 1;
 }
 
 /* 章選択メニュー */
@@ -50,18 +56,18 @@ body {
 
 /* 本文エリア */
 #text-container {
-    width: 70%; /* もう少し右に寄せる */
+    width: 80%;
     max-width: 800px;
-    height: 400px; /* 12行分の高さ */
+    height: 500px; /* 20行分の高さ */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
-    font-size: 20px;
-    line-height: 1.8;
+    font-size: 14px; /* 文字サイズを小さくして20行入るように */
+    line-height: 1.5;
     margin-top: 20px;
-    margin-left: 100px; /* さらに右へ */
+    margin-left: 100px; /* 右寄せ */
     overflow: hidden;
     position: relative;
 }
@@ -87,21 +93,22 @@ body {
     to { opacity: 1; }
 }
 
-/* ページナビゲーションボタン（かなり下に配置） */
-#nav-buttons {
+/* 前のページに戻るボタン（目立たないように画面隅に配置） */
+#prev-button {
     position: fixed;
-    bottom: 30px; /* ページのかなり下に */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 20px;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    z-index: 200;
+    opacity: 0.5;
+    transition: opacity 0.3s;
 }
 
-#nav-buttons button {
-    background: #222;
-    color: #fff;
-    border: 1px solid #fff;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 16px;
+#prev-button:hover {
+    opacity: 1;
 }
