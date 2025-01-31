@@ -1,6 +1,6 @@
 let chapterData = [];
 let currentLine = 0;
-const maxLines = 20; // 最大表示行数を20に変更
+const maxLines = 20; // 最大表示行数
 const textContainer = document.getElementById('text-container');
 
 // 章選択メニューの開閉
@@ -59,3 +59,28 @@ function nextLine() {
 
         let newLine = document.createElement("p");
         newLine.className = "text-line";
+        textContainer.appendChild(newLine);
+
+        typeText(newLine, chapterData[currentLine]);
+        currentLine++;
+    }
+}
+
+// 前のページへ戻る（1つ前の20行に戻る）
+function prevPage() {
+    if (currentLine > maxLines) {
+        currentLine -= maxLines;
+        textContainer.innerHTML = ""; // 画面をクリア
+        for (let i = 0; i < maxLines && currentLine + i < chapterData.length; i++) {
+            let newLine = document.createElement("p");
+            newLine.className = "text-line";
+            textContainer.appendChild(newLine);
+            typeText(newLine, chapterData[currentLine + i]);
+        }
+    }
+}
+
+// 初期ロード（デフォルトで第1章を表示）
+window.onload = function() {
+    loadChapter('chapter1.txt');
+};
