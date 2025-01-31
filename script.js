@@ -1,6 +1,6 @@
 let chapterData = [];
 let currentLine = 0;
-const maxLines = 20; // 最大表示行数
+const maxLines = 10; // 最大表示行数
 const textContainer = document.getElementById('text-container');
 
 // 章選択メニューの開閉
