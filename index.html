@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stigma</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onclick="nextLine()">  <!-- 画面全体クリックで次のセリフ -->
+
+    <!-- 章選択ボタン -->
+    <button id="menu-button">Chapter Select</button>
+
+    <!-- 章選択メニュー -->
+    <div id="chapter-menu">
+        <h2 id="site-title">Stigma</h2>
+        <ul>
+            <li onclick="loadChapter('chapter1.txt')">第1章: 始まり</li>
+            <li onclick="loadChapter('chapter2.txt')">第2章: 運命</li>
+            <li onclick="loadChapter('chapter3.txt')">第3章: 覚醒</li>
+        </ul>
+    </div>
+
+    <!-- 本文表示エリア -->
+    <div id="text-container">
+        <p id="novel-text">クリックして進む...</p>
+    </div>
+
+    <!-- ページナビゲーション -->
+    <div id="nav-buttons">
+        <button onclick="prevPage()">◀ 前のページ</button>
+        <button onclick="nextPage()">次のページ ▶</button>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
