@@ -58,3 +58,40 @@ function nextLine() {
         textContainer.appendChild(newLine);
 
         typeText(newLine, chapterData[currentLine]);
+        currentLine++;
+    }
+}
+
+// 前のページへ戻る（まだ実装されていない場合の仮処理）
+function prevPage() {
+    if (currentLine > 0) {
+        currentLine -= maxLines; // 1ページ分戻る
+        if (currentLine < 0) currentLine = 0;
+        textContainer.innerHTML = "";
+        for (let i = 0; i < maxLines && currentLine + i < chapterData.length; i++) {
+            let newLine = document.createElement("p");
+            newLine.className = "text-line";
+            textContainer.appendChild(newLine);
+            typeText(newLine, chapterData[currentLine + i]);
+        }
+    }
+}
+
+// 次のページへ（まだ実装されていない場合の仮処理）
+function nextPage() {
+    if (currentLine < chapterData.length) {
+        textContainer.innerHTML = ""; // 画面をクリア
+        for (let i = 0; i < maxLines && currentLine + i < chapterData.length; i++) {
+            let newLine = document.createElement("p");
+            newLine.className = "text-line";
+            textContainer.appendChild(newLine);
+            typeText(newLine, chapterData[currentLine + i]);
+        }
+        currentLine += maxLines;
+    }
+}
+
+// 初期ロード（デフォルトで第1章を表示）
+window.onload = function() {
+    loadChapter('chapter1.txt');
+};
