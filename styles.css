@@ -18,7 +18,7 @@ body {
     left: 10px;
     background: none;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     padding: 5px;
     cursor: pointer;
     z-index: 200;
@@ -58,16 +58,15 @@ body {
 #text-container {
     width: 80%;
     max-width: 800px;
-    height: 500px; /* 20行分の高さ */
+    height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
-    font-size: 14px; /* 文字サイズを小さくして20行入るように */
+    font-size: 16px;
     line-height: 1.5;
     margin-top: 20px;
-    margin-left: 100px; /* 右寄せ */
     overflow: hidden;
     position: relative;
 }
@@ -93,11 +92,11 @@ body {
     to { opacity: 1; }
 }
 
-/* 前のページに戻るボタン（目立たないように画面隅に配置） */
+/* 前のページに戻るボタン（目立たないように左下に配置） */
 #prev-button {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    left: 10px;
     background: rgba(255, 255, 255, 0.2);
     color: #fff;
     font-size: 12px;
