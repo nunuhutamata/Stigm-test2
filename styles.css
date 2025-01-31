@@ -52,7 +52,7 @@ body {
 #text-container {
     width: 70%; /* もう少し右に寄せる */
     max-width: 800px;
-    height: 400px; /* 12行分の高さに変更 */
+    height: 400px; /* 12行分の高さ */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -70,6 +70,9 @@ body {
 .text-line {
     opacity: 0;
     animation: fadeIn 0.3s ease-in-out forwards;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
 }
 
 /* 文字が1文字ずつ表示されるアニメーション */
