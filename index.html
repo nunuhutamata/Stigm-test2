@@ -6,10 +6,10 @@
     <title>Stigma</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body onclick="nextLine()">  <!-- 画面全体クリックで次のセリフ -->
+<body>
 
-    <!-- 章選択ボタン -->
-    <button id="menu-button">Chapter Select</button>
+    <!-- 章選択ボタン（C のみ表示） -->
+    <button id="menu-button">C</button>
 
     <!-- 章選択メニュー -->
     <div id="chapter-menu">
@@ -22,15 +22,10 @@
     </div>
 
     <!-- 本文表示エリア -->
-    <div id="text-container">
-        <p id="novel-text">クリックして進む...</p>
-    </div>
+    <div id="text-container"></div>
 
-    <!-- ページナビゲーション -->
-    <div id="nav-buttons">
-        <button onclick="prevPage()">◀ 前のページ</button>
-        <button onclick="nextPage()">次のページ ▶</button>
-    </div>
+    <!-- 前のページに戻るボタン -->
+    <button id="prev-button" onclick="prevPage()">◀</button>
 
     <script src="script.js"></script>
 
