@@ -1,7 +1,7 @@
 let chapterData = [];
-let currentPage = 0;
 let currentLine = 0;
-const linesPerPage = 5; // 1ページに表示する行数
+const maxLines = 20; // 最大表示行数
+const textContainer = document.getElementById('text-container');
 
 // 章選択メニューの開閉
 document.getElementById('menu-button').addEventListener('click', function() {
@@ -11,45 +11,54 @@ document.getElementById('menu-button').addEventListener('click', function() {
 
 // 章の読み込み
 function loadChapter(chapterFile) {
-    console.log(`Trying to load: text/${chapterFile}`); // デバッグ用ログ
-
     fetch(`text/${chapterFile}`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.text();
-    })
+    .then(response => response.text())
     .then(text => {
-        console.log("Successfully loaded chapter:", chapterFile); // デバッグ用ログ
         chapterData = text.split("\n").filter(line => line.trim() !== ""); // 空行を削除
-        currentPage = 0;
         currentLine = 0;
-        displayPage();
+        textContainer.innerHTML = ""; // 初期化
+        nextLine(); // 最初のセリフを表示
     })
     .catch(error => {
-        console.error('Failed to load chapter file:', error);
+        console.error('テキストの読み込みに失敗しました:', error);
     });
 }
 
-// 1セリフずつ表示（画面クリックで進む）
-function nextLine() {
-    if (currentLine < chapterData.length) {
-        document.getElementById('novel-text').innerText = chapterData[currentLine];
-        currentLine++;
+// 1文字ずつ表示するアニメーション
+function typeText(element, text, callback) {
+    let index = 0;
+    element.textContent = ""; // 初期化
 
-        if ((currentLine % linesPerPage === 0) || (currentLine === chapterData.length)) {
-            currentPage++;
+    function type() {
+        if (index < text.length) {
+            element.textContent += text[index];
+            index++;
+            setTimeout(type, 50); // 50ms間隔で次の文字を表示
+        } else {
+            if (callback) callback();
         }
     }
+    
+    type();
 }
 
-// ページを表示
-function displayPage() {
-    if (chapterData.length > 0) {
-        document.getElementById('novel-text').innerText = chapterData.slice(currentPage * linesPerPage, (currentPage + 1) * linesPerPage).join("\n");
-    } else {
-        document.getElementById('novel-text').innerText = "（この章には本文がありません）";
+// クリックで次のセリフを追加
+document.body.addEventListener('click', function() {
+    nextLine();
+});
+
+function nextLine() {
+    if (currentLine < chapterData.length) {
+        if (textContainer.children.length >= maxLines) {
+            textContainer.innerHTML = ""; // 20行超えたらリセット
+        }
+
+        let newLine = document.createElement("p");
+        newLine.className = "text-line";
+        textContainer.appendChild(newLine);
+
+        typeText(newLine, chapterData[currentLine]);
+        currentLine++;
     }
 }
 
