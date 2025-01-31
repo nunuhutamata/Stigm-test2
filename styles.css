@@ -2,7 +2,7 @@
 body {
     background-color: #000;
     color: #fff;
-    font-family: 'Noto Sans JP', sans-serif; /* 硬派でオシャレなフォント */
+    font-family: 'Noto Sans JP', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -50,9 +50,9 @@ body {
 
 /* 本文エリア */
 #text-container {
-    width: 80%;
+    width: 70%; /* もう少し右に寄せる */
     max-width: 800px;
-    height: 500px;
+    height: 400px; /* 12行分の高さに変更 */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -61,6 +61,7 @@ body {
     font-size: 20px;
     line-height: 1.8;
     margin-top: 20px;
+    margin-left: 100px; /* さらに右へ */
     overflow: hidden;
     position: relative;
 }
@@ -81,4 +82,23 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* ページナビゲーションボタン（かなり下に配置） */
+#nav-buttons {
+    position: fixed;
+    bottom: 30px; /* ページのかなり下に */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+#nav-buttons button {
+    background: #222;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
 }
