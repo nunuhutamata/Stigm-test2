@@ -24,6 +24,48 @@ function loadChapter(chapterFile) {
     });
 }
 
+// クリックで次のセリフを追加
+document.body.addEventListener('click', function() {
+    nextLine();
+});
+
+function nextLine() {
+    while (currentLine < chapterData.length && chapterData[currentLine].trim() === "") {
+        currentLine++; // 空白行をスキップ
+    }
+
+    if (currentLine < chapterData.length) {
+        // 背景色変更タグがある場合
+        if (chapterData[currentLine].startsWith("[BG:")) {
+            let bgColor = chapterData[currentLine].match(/\[BG:(.*?)\]/)[1].trim();
+            document.body.style.transition = "background-color 0.5s ease";
+            document.body.style.backgroundColor = bgColor;
+            currentLine++;
+            return nextLine(); // 次の行へ
+        }
+
+        // 文字色変更タグがある場合
+        if (chapterData[currentLine].startsWith("[COLOR:")) {
+            let textColor = chapterData[currentLine].match(/\[COLOR:(.*?)\]/)[1].trim();
+            document.body.style.transition = "color 0.5s ease";
+            document.body.style.color = textColor;
+            currentLine++;
+            return nextLine(); // 次の行へ
+        }
+
+        if (textContainer.children.length >= maxLines) {
+            textContainer.innerHTML = ""; // 10行超えたらリセット
+        }
+
+        let newLine = document.createElement("p");
+        newLine.className = "text-line";
+        textContainer.appendChild(newLine);
+
+        typeText(newLine, chapterData[currentLine]);
+        currentLine++;
+    }
+}
+
 // 1文字ずつ表示するアニメーション
 function typeText(element, text, callback) {
     let index = 0;
@@ -40,44 +82,6 @@ function typeText(element, text, callback) {
     }
     
     type();
-}
-
-// クリックで次のセリフを追加
-document.body.addEventListener('click', function() {
-    nextLine();
-});
-
-function nextLine() {
-    while (currentLine < chapterData.length && chapterData[currentLine].trim() === "") {
-        currentLine++; // 空白行をスキップ
-    }
-
-    if (currentLine < chapterData.length) {
-        if (textContainer.children.length >= maxLines) {
-            textContainer.innerHTML = ""; // 20行超えたらリセット
-        }
-
-        let newLine = document.createElement("p");
-        newLine.className = "text-line";
-        textContainer.appendChild(newLine);
-
-        typeText(newLine, chapterData[currentLine]);
-        currentLine++;
-    }
-}
-
-// 前のページへ戻る（1つ前の20行に戻る）
-function prevPage() {
-    if (currentLine > maxLines) {
-        currentLine -= maxLines;
-        textContainer.innerHTML = ""; // 画面をクリア
-        for (let i = 0; i < maxLines && currentLine + i < chapterData.length; i++) {
-            let newLine = document.createElement("p");
-            newLine.className = "text-line";
-            textContainer.appendChild(newLine);
-            typeText(newLine, chapterData[currentLine + i]);
-        }
-    }
 }
 
 // 初期ロード（デフォルトで第1章を表示）
